@@ -1,11 +1,18 @@
 <template>
   <div class="app-container">
     <h1>📝 Task Manager ของฉัน</h1>
+    <TaskList/>
   </div>
 </template>
 
 <script>
+import TaskList from './components/TaskList.vue';
+
   //พื้นที่สำหรับเขียน JavaScript (ดึง API, จัดการข้อมูล) จะอยู่ตรงนี้
+</script>
+
+<script setup>
+  import TaskList from './components/TaskList.vue';
 </script>
 
 <style>
