@@ -14,13 +14,24 @@
 </template>
 
 <script setup>
-    import { ref } from 'vue';
-
+    import { onMounted, ref } from 'vue';
+    import axios from 'axios';
     // สร้างข้อมูลจำลอง (Mock Data) ไปก่อน เดี๋ยว Step ถัดไปเราจะดึงจาก API จริง
-    const tasks = ref ([
-        { id: 1, title: 'ออกแบบ Database', isCompleted: true },
-        { id: 2, title: 'สร้าง Vue Component', isCompleted: false },
-    ]);
+    const tasks = ref ([]);
+
+    const fetchTasks = async () => {
+        try {
+            const response = await  axios.get ('http://localhost:5068/tasks');
+            tasks.value = response.data; // เอาข้อมูลที่ได้มาใส่ในกล่อง tasks
+        } catch (error) {
+            console.error ('เกิดข้อผิพลาด',error);
+        }
+    };
+
+    // onMounted คือคำสั่งบอก Vue ว่า "พอวาดหน้าเว็บเสร็จปุ๊บ ให้เรียกฟังก์ชันดึงข้อมูลทันทีเลยนะ!"
+    onMounted (() => {
+        fetchTasks();
+    });
 </script>
 
 <style scoped>
